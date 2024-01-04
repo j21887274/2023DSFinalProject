@@ -64,10 +64,10 @@ public class Main  {
 	   searchString = searchString.replace(" ", "+");
 	   lcs recommend = new lcs(keywords, searchString);
 	   String recommend_key = recommend.rank();
-//	   System.out.println(recommend_key);
+ 	   System.out.println("recommended key : "+recommend_key);
 	   
 	   headerlist ans=new headerlist();
-	   GoogleQuery g =new GoogleQuery(searchString);
+	   GoogleQuery g =new GoogleQuery(searchString+"+Australia+"+recommend_key);
 	   
 	   HashMap<String, String> results = g.query();
 	   
@@ -82,6 +82,7 @@ public class Main  {
 			    
 			    //while還有子頁面,addchild
 			    Query child = new Query(results.get(key).substring(7));
+//			    GoogleQuery child = new GoogleQuery(results.get(key).substring(7));
 			    HashMap<String, String> childmap = child.query();
 //			    System.out.println(childmap.size());
 			    
@@ -92,7 +93,7 @@ public class Main  {
 				//計算並輸出
 				tree.setPostOrderScore(keywords);
 				tree.eularPrintTree();
-				//System.out.println(tree.root.nodeScore);
+				System.out.println(tree.root.nodeScore);
 				ans.add(new header(key, results.get(key).substring(7), tree.root.nodeScore));
 				}
 				catch(Exception e) {
@@ -107,8 +108,8 @@ public class Main  {
 		}
 		//排序
 		System.out.println(ans.size());
-//		ans.output();
 		ans.sort();
+		ans.output();
 		ans.addfirst(new header("Do you want to search: "+recommend_key+" ?", "http://www.google.com/search?q="+recommend_key+"&oe=utf8&num=30", 9999));
 //		ans.output();
 		System.out.println("Done!");

@@ -45,14 +45,26 @@ public class TestProject extends HttpServlet {
 		
 		// adjusted part from here
 		Main Main = new Main(request.getParameter("keyword"));
-		headerlist hl = null;
+		headerlist h1 = null;
 		try {
-			hl = Main.main();
+			h1 = Main.main();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// to here
+		
+//      
+//		String[][] s = new String[h1.size()][2];
+//		request.setAttribute("query", s);
+//		int num = 0;
+//		for(int i=0; i < h1.lst.size(); i++) {
+//		    String key = h1.lst.get(i).name + " | " + Math.round(h1.lst.get(i).count);
+//		    String value = h1.lst.get(i).url;
+//		    s[num][0] = key;
+//		    s[num][1] = value;
+//		    num++;
+//		}
 		
 		String[][] s = new String[query.size()][2];
 		request.setAttribute("query", s);
